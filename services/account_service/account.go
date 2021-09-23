@@ -32,7 +32,7 @@ func AddAccount(username, password string) error {
 }
 
 // DeleteAccount delete a single account
-func DeleteAccount(id int) error {
+func DeleteAccount(id uint) error {
 	if err := global.GORM.Where("id = ?", id).Delete(&models.Account{}).Error; err != nil {
 		return err
 	}
@@ -40,7 +40,7 @@ func DeleteAccount(id int) error {
 }
 
 // EditAccount  更新多个属性，只会更新那些被修改了的和非空的字段
-func EditAccount(id int, data interface{}) error {
+func EditAccount(id uint, data interface{}) error {
 	if err := global.GORM.Model(&models.Account{}).Where("id = ?", id).Updates(data).Error; err != nil {
 		return err
 	}
@@ -48,7 +48,7 @@ func EditAccount(id int, data interface{}) error {
 }
 
 // GetAccount get an account
-func GetAccount(id int) (*models.Account, error) {
+func GetAccount(id uint) (*models.Account, error) {
 	var account models.Account
 	err := global.GORM.Where("id = ?", id).First(&account).Error
 	if err != nil {
